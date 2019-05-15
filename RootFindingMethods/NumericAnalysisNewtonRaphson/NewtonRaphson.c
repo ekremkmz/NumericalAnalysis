@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #define EPS 0.0000000000001
+#define SIZE 50
 double dizikoy(double dizi[],double x,int a){
 	int i,j;
-	double dizipow[100],tmp,fx;
-	/*Sayýyý fonksiyona koyan blok.*/
+	double dizipow[SIZE],tmp,fx;
+	/*Sayiyi fonksiyona koyan blok.*/
 		for(i=a;i>=0;i--){
 			tmp=1;
 			for(j=i;j>=1;j--){
@@ -22,11 +24,11 @@ double dizikoy(double dizi[],double x,int a){
 		return fx;
 }
 int main() {
-	int a,i,j;
-	/*Denklemi diziye tanýmlayan blok*/
+	int a,i;
+	/*Denklemi diziye tanimlayan blok*/
 	printf("Denklem kacinci dereceden?\n");
 	scanf("%d",&a);
-	double x,x1,x2,fx1=1,fturx1,hata,tmp,dizitur[a],atur,dizi[a+1],dizipow[a+1],diziturpow[a+1];
+	double x1,x2,fx1=1,fturx1,hata,dizi[SIZE];
 	for(i=a; i>=0 ;i--){
 		if(i>0){
 			printf("%d. dereceli terimin katsayisini giriniz.\n", i);
@@ -37,7 +39,7 @@ int main() {
 			scanf("%lf",&dizi[i]);
 		}	
 	}
-	/*Fonksiyonu yazdýran blok*/
+	/*Fonksiyonu yazdiran blok*/
 	printf("Fonksiyonunuz: \t");
 	for(i=a; i>=2 ;i--){
 		if(dizi[i]==(int)dizi[i]){
@@ -71,39 +73,21 @@ int main() {
 	else if(dizi[0]!=0){
 		printf("%lf",dizi[0]);
 	}
-	//Turev fonksiyonu tanýmlayan blok
-	for(i=1; i<=a ;i++){
-		if(dizi[i]!=0){
-			dizitur[i-1]=dizi[i];
-			dizitur[i-1]*=i;
-		}
-	}
-	atur=a-1;
-	/*Tahmini kok alan blok*/
 	printf("\nTahmini koku giriniz:");
 	scanf("%lf",&x2);
-	
-	/*Koke yaklasan blok*/
+	/*NewtonRaphson algoritmasi*/
 	do{
 		x1=x2;
-		/*Sayýyý fonksiyona koyan blok.*/
-		x=x1;
-		fx1=dizikoy(dizi,x,a);
+		fx1=dizikoy(dizi,x1,a);
 		/*Sayýyý turev fonksiyonuna koyan blok.*/
-		fturx1=(dizikoy(dizi,x,a)-dizikoy(dizi,x+EPS,a))/(x-(x+EPS));
+		fturx1=(dizikoy(dizi,x1,a)-dizikoy(dizi,x1+EPS,a))/(x1-(x1+EPS));
 		/*Algoritma*/
 		x2=x1-(fx1/fturx1);
-		if(x1-x2<0){
-			hata=x2-x1;
-		}
-		else{
-			hata=x1-x2;
-		}
+		hata=fabs(x1-x2);
 		printf("\nx2=x1-f(x)/f'(x)\tx=%lf-(%lf/%lf)\tx=%lf\n",x1,fx1,fturx1,x2);
 	}
 	while(hata>EPS);
-		
-	
 	printf("\n\nKokunuz %.15f hata payi ile %.15f olarak hesaplanmistir.",hata,x2);
-	return 0;	
+	printf("\nCikis icin bir tusa basiniz...");
+	getch();	
 }

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #define SIZE 50
+/*Matris yazdiran blok*/
 void matrisYaz(float Matris[][2*SIZE],int N){
 	int i,j;
 	printf("\n");
@@ -11,7 +12,7 @@ void matrisYaz(float Matris[][2*SIZE],int N){
 		printf("|\n");
 	}
 }
-/*Gauss Jordan Yöntemi*/
+/*Gauss Jordan ile inverse alma*/
 void matrisInverse(float Matris[][2*SIZE],float MatrisInverse[][2*SIZE],int N){
 	int i,j,k;
 	float tmp;
@@ -33,7 +34,7 @@ void matrisInverse(float Matris[][2*SIZE],float MatrisInverse[][2*SIZE],int N){
 		}
 		for(j=i+1;j<N;j++){
 			tmp=Matris[j][i];
-			for(k=0;k<2*N;k++){
+			for(k=i;k<2*N;k++){
 				Matris[j][k]-=tmp*Matris[i][k];
 			}
 		}
@@ -42,7 +43,7 @@ void matrisInverse(float Matris[][2*SIZE],float MatrisInverse[][2*SIZE],int N){
 	for(i=N;i>=0;i--){
 		for(j=i-1;j>=0;j--){
 			tmp=Matris[j][i];
-			for(k=0;k<2*N;k++){
+			for(k=i;k<2*N;k++){
 				Matris[j][k]-=tmp*Matris[i][k];
 			}
 		}
@@ -58,9 +59,10 @@ int main() {
 	printf("Kare matris kac satir?\n");
 	scanf("%d",&N);
 	float Matris[SIZE][2*SIZE],MatrisInverse[SIZE][2*SIZE];
+	/*Matrisi kullanicidan alan blok*/
 	for(i=0;i<N;i++){
 		for(j=0;j<N;j++){
-			printf("Matrisin %d.Satir %d.Sutun elemani nedir?",i+1,j+1);
+			printf("Matrisin %d.Satir %d.Sutun elemani nedir?\n",i+1,j+1);
 			scanf("%f",&Matris[i][j]);
 		}
 	}
@@ -69,5 +71,6 @@ int main() {
 	matrisInverse(Matris,MatrisInverse,N);
 	printf("\nMatrisinizin tersi:\n");
 	matrisYaz(MatrisInverse,N);
+	printf("\nCikis icin bir tusa basiniz...");
 	getch();
 }

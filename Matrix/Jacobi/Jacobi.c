@@ -2,6 +2,7 @@
 #include <math.h>
 #define SIZE 50
 #define EPS 0.00001
+/*Jacobi algoritmasi*/
 float jacobi(float Matris[][SIZE],float root[], int i, int N){
 	int j;
 	float tmp=0;
@@ -20,17 +21,19 @@ int main() {
 	scanf("%d",&N);
 	printf("Denklemleri girerken en buyuk sayilari matrisin kosegenine denk getirin.Aksi halde irsaksama olur.\n");
 	float max,tmp[SIZE],dx,Matris[SIZE][SIZE],root[SIZE];
+	/*Denklemleri matrise tanimlayan blok*/
 	for(i=0;i<N;i++){
 		for(j=0;j<N;j++){
-			printf("%d. denklemdeki x%d nin katsayisi nedir?",i+1,j+1);
+			printf("%d. denklemdeki x%d nin katsayisi nedir?\n",i+1,j+1);
 			scanf("%f",&Matris[i][j]);
 		}
-		printf("%d. denklemin esiti nedir?",i+1);
+		printf("%d. denklemin esiti nedir?\n",i+1);
 		scanf("%f",&Matris[i][N]);
 	}
 	for(i=0;i<N;i++){
 		tmp[i]=1;
 	}
+	/*Matrisi yazdiran blok*/
 	for(i=0;i<N;i++){
 		printf("|");
 		for(j=0;j<N;j++){
@@ -38,6 +41,7 @@ int main() {
 		}
 		printf("/ %f |\n",Matris[i][N]);
 	}
+	/*Algoritmayi cagiran blok*/
 	do{
 		for(i=0;i<N;i++){
 			root[i]=tmp[i];
@@ -55,5 +59,6 @@ int main() {
 	for(i=0;i<N;i++){
 		printf(" x%d=%f ",i+1,root[i]);
 	}
+	printf("\nCikis icin bir tusa basiniz...");
 	getch();
 }

@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define SIZE 50
 double dizikoy(double dizi[],double x,int a){
 	int i,j;
 	double dizipow[100],tmp,fx;
-	/*Sayýyý fonksiyona koyan blok.*/
+	/*Sayiyi fonksiyona koyan blok.*/
 		for(i=a;i>=0;i--){
 			tmp=1;
 			for(j=i;j>=1;j--){
@@ -22,10 +23,10 @@ double dizikoy(double dizi[],double x,int a){
 }
 int main() {
 	int a,i,j;
-	/*Denklemi diziye tanýmlayan blok*/
+	/*Denklemi diziye tanimlayan blok*/
 	printf("Denklem kacinci dereceden?\n");
 	scanf("%d",&a);
-	double dx=1,x1=1,x2=1,dizi[100],total=0,h;
+	double dx=1,x1=1,x2=1,dizi[SIZE],total=0,h;
 	for(i=a; i>=0 ;i--){
 		if(i>0){
 			printf("\n%d. dereceli terimin katsayisini giriniz.\n", i);
@@ -36,7 +37,7 @@ int main() {
 			scanf("%lf",&dizi[i]);
 		}	
 	}
-	/*Fonksiyonu yazdýran blok*/
+	/*Fonksiyonu yazdiran blok*/
 	printf("Fonksiyonunuz: \t");
 	for(i=a; i>=2 ;i--){
 		if(dizi[i]==(int)dizi[i]){
@@ -70,12 +71,14 @@ int main() {
 	else if(dizi[0]!=0){
 		printf("%lf",dizi[0]);
 	}
+	/*Integral alinacak araligi alan blok*/
 	printf("\n\nIntegral alt araligi giriniz.\n");
 	scanf("%lf",&x1);
 	printf("\nIntegral ust araligi giriniz.\n");
 	scanf("%lf",&x2);
 	printf("\nIntegral kac parcaya bolunsun?(Ne kadar yuksek girerseniz o kadar dogru calisir)\n");
 	scanf("%lf",&dx);
+	/*Trapez yontemi*/
 	h=(x2-x1)/dx;
 	for(i=1;i<dx;i++){
 		total+=2*dizikoy(dizi, x1+i*h, a);
@@ -83,6 +86,8 @@ int main() {
 	total+=(dizikoy(dizi, x1, a)+dizikoy(dizi, x2, a));	
 	total=total*h/2;
 	printf("\n\nIntegral sonucunuz: %f",total);
+	printf("\nCikis icin bir tusa basiniz...");
+	getch();
 }
 
 

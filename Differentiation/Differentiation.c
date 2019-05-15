@@ -4,7 +4,7 @@
 double dizikoy(double dizi[],double x,int a){
 	int i,j;
 	double dizipow[100],tmp,fx;
-	/*Sayýyý fonksiyona koyan blok.*/
+	/*Sayiyi fonksiyona koyan blok.*/
 		for(i=a;i>=0;i--){
 			tmp=1;
 			for(j=i;j>=1;j--){
@@ -23,7 +23,7 @@ double dizikoy(double dizi[],double x,int a){
 }
 int main() {
 	int a,i,j;
-	/*Denklemi diziye tanýmlayan blok*/
+	/*Denklemi diziye tanimlayan blok*/
 	printf("Denklem kacinci dereceden?\n");
 	scanf("%d",&a);
 	double x,fturx,dizi[a+1];
@@ -37,7 +37,7 @@ int main() {
 			scanf("%lf",&dizi[i]);
 		}	
 	}
-	/*Fonksiyonu yazdýran blok*/
+	/*Fonksiyonu yazdiran blok*/
 	printf("Fonksiyonunuz: \t");
 	for(i=a; i>=2 ;i--){
 		if(dizi[i]==(int)dizi[i]){
@@ -73,9 +73,10 @@ int main() {
 	}
 	printf("\nHangi noktadaki turevi hesaplansin?");
 	scanf("%lf",&x);
-	/*Sayýyý turev fonksiyonuna koyan blok.*/
+	/*Sayiyi turev fonksiyonuna koyan blok.*/
 	fturx=(dizikoy(dizi,x,a)-dizikoy(dizi,x+EPS,a))/(x-(x+EPS));
 	printf("\n\nf'(%.7f)=%.7f",x,fturx);
-		
+	printf("\nCikis icin bir tusa basiniz...");
+	getch();
 }
 
